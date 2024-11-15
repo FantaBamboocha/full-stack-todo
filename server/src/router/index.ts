@@ -3,10 +3,20 @@ import todoController from '../controllers/todoController.js';
 
 const router = Router();
 
-router.get('/todo', todoController.getAllTodos);
-router.post('/todo', todoController.createTodo);
-router.patch('/todo/:id/edit', todoController.editTodo);
-router.patch('/todo/:id/toggle', todoController.toggleTodo);
-router.delete('/todo/:id', todoController.deleteTodo);
+router.get('/todo', async (req, res, next) => {
+  await todoController.getAllTodos(req, res, next);
+});
+router.post('/todo', async (req, res, next) => {
+  await todoController.createTodo(req, res, next);
+});
+router.patch('/todo/:id/edit', async (req, res, next) => {
+  await todoController.editTodo(req, res, next);
+});
+router.patch('/todo/:id/toggle', async (req, res, next) => {
+  await todoController.toggleTodo(req, res, next);
+});
+router.delete('/todo/:id', async (req, res, next) => {
+  await todoController.deleteTodo(req, res, next);
+});
 
 export default router;

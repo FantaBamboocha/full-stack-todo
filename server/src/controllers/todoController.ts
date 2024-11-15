@@ -3,7 +3,11 @@ import { NextFunction, Request, Response } from 'express';
 import todoService from '../service/todoService.js';
 
 class TodoController {
-  async getAllTodos(req: Request, res: Response, next: NextFunction) {
+  async getAllTodos(
+    _req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response | void> {
     try {
       const todos = await todoService.getAllTodos();
 
@@ -13,7 +17,11 @@ class TodoController {
     }
   }
 
-  async createTodo(req: Request, res: Response, next: NextFunction) {
+  async createTodo(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response | void> {
     const { title } = req.body;
 
     try {
@@ -25,7 +33,11 @@ class TodoController {
     }
   }
 
-  async editTodo(req: Request, res: Response, next: NextFunction) {
+  async editTodo(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response | void> {
     const { id } = req.params;
     const { title } = req.body;
 
@@ -38,7 +50,11 @@ class TodoController {
     }
   }
 
-  async toggleTodo(req: Request, res: Response, next: NextFunction) {
+  async toggleTodo(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response | void> {
     const { id } = req.params;
 
     try {
@@ -50,12 +66,14 @@ class TodoController {
     }
   }
 
-  async deleteTodo(req: Request, res: Response, next: NextFunction) {
+  async deleteTodo(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response | void> {
     const { id } = req.params;
 
     try {
-      // const todo = await todoService.deleteTodo(id);
-      // return res.status(200).json(todo);
       await todoService.deleteTodo(id);
       return res.sendStatus(204);
     } catch (error) {

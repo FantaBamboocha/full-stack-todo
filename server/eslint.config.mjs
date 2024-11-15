@@ -35,7 +35,10 @@ export default tseslint.config(
     rules: {
       // 'no-console': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
       '@typescript-eslint/no-inferrable-types': 'warn',
     },
   },
