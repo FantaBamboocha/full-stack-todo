@@ -1,9 +1,6 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-interface ITodo extends Document {
-  title: string;
-  isCompleted: boolean;
-}
+import { ITodo } from '../definitions/ITodo.js';
 
 const TodoSchema: Schema<ITodo> = new mongoose.Schema({
   title: {

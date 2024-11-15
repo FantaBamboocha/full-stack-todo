@@ -1,3 +1,4 @@
+import { ITodo } from '../definitions/ITodo.js';
 import ApiError from '../exceptions/api-error.js';
 import todoModel from '../models/todoModel.js';
 
@@ -15,14 +16,14 @@ class TodoService {
     return await todoModel.create({ title });
   }
 
-  async editTodo(id: string, title: string) {
-    if (!title) {
+  async editTodo(id: string, data: ITodo) {
+    if (!data.title) {
       throw ApiError.BadRequest('Title is required');
     }
 
     const updatedTodo = await todoModel.findByIdAndUpdate(
       id,
-      { title },
+      { ...data },
       { new: true },
     );
 

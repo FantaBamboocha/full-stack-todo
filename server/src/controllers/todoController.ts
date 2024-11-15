@@ -39,10 +39,10 @@ class TodoController {
     next: NextFunction,
   ): Promise<Response | void> {
     const { id } = req.params;
-    const { title } = req.body;
+    const data = req.body;
 
     try {
-      const todo = await todoService.editTodo(id, title);
+      const todo = await todoService.editTodo(id, data);
 
       return res.status(200).json(todo);
     } catch (error) {
