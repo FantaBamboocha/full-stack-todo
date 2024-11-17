@@ -1,51 +1,56 @@
-import { useState } from 'react';
-import { ITodo } from '../definitions/ITodo';
+import React from 'react';
+import { Button, Checkbox, Divider, Space, Typography } from 'antd';
+
+import { ITodo } from '@definitions/ITodo';
 
 interface ITodoItemProps {
   todo: ITodo;
   onDelete: (id: number) => void;
-  onEdit: (id: number, title: string, isCompleted: boolean) => void;
+  setIsEditable: (isCompleted: boolean) => void;
   onToggle: (id: number) => void;
 }
 
-export const TodoItem = ({
-  todo,
-  onDelete,
-  onEdit,
-  onToggle,
-}: ITodoItemProps) => {
-  const { id, title, isCompleted } = todo;
-  const [isEditable, setIsEditable] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(title);
+export const TodoItem = React.memo(
+  ({
+    todo,
+    onDelete,
+    // onEdit,
+    onToggle,
+    // isEditable,
+    setIsEditable,
+  }: ITodoItemProps) => {
+    const { id, title, isCompleted } = todo;
 
-  const handleSave = () => {
-    onEdit(id, editedTitle, isCompleted);
-    setIsEditable(false);
-  };
-  return (
-    <div>
-      {isEditable ? (
-        <>
-          <input
-            type="text"
-            value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}
-          />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={() => setIsEditable(false)}>Cancel</button>
-        </>
-      ) : (
-        <>
-          <input
-            type="checkbox"
+    return (
+      <>
+        <Typography.Text style={{ fontSize: 20 }}>{title}</Typography.Text>
+        <Divider />
+        <Space>
+          <Checkbox
             checked={isCompleted}
+            style={{ fontSize: 20 }}
             onChange={() => onToggle(id)}
-          />
-          <p>{todo.title}</p>
-          <button onClick={() => setIsEditable(true)}>Edit</button>
-          <button onClick={() => onDelete(id)}>Delete</button>
-        </>
-      )}
-    </div>
-  );
-};
+          >
+            Completed
+          </Checkbox>
+          <Button
+            variant="filled"
+            color="primary"
+            style={{ fontSize: 20 }}
+            onClick={() => setIsEditable(true)}
+          >
+            Edit
+          </Button>
+          <Button
+            variant="outlined"
+            color="danger"
+            style={{ fontSize: 20 }}
+            onClick={() => onDelete(id)}
+          >
+            Delete
+          </Button>
+        </Space>
+      </>
+    );
+  },
+);

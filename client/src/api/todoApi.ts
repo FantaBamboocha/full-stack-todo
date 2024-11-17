@@ -1,4 +1,4 @@
-import { axiosIstance } from './axiosIstance';
+import { axiosIstance } from '@api/index';
 
 export const todoApi = {
   getAllTodos: async () => {
