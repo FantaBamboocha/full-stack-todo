@@ -1,11 +1,22 @@
-import { useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 import { ITodo } from "@definitions/ITodo";
 import { todoApi } from "@api/todoApi";
 
-// нарушил принцип DRY в блоках catch
-export const useTodos = () => {
+interface ITodosContextType {
+  todos: ITodo[];
+  error: string | null;
+  createTodo: (title: string) => void;
+  editTodo: (id: number, title: string, isCompleted: boolean) => void;
+  toggleTodo: (id: number) => void;
+  deleteTodo: (id: number) => void;
+  getAllTodos: () => void;
+}
+
+export const TodosContext = createContext<ITodosContextType | null>(null);
+
+export const TodosProvider = ({ children }: { children: React.ReactNode }) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -89,13 +100,19 @@ export const useTodos = () => {
     getAllTodos();
   }, []);
 
-  return {
-    todos,
-    error,
-    getAllTodos,
-    createTodo,
-    editTodo,
-    toggleTodo,
-    deleteTodo,
-  };
+  return (
+    <TodosContext.Provider
+      value={{
+        todos,
+        error,
+        createTodo,
+        editTodo,
+        toggleTodo,
+        deleteTodo,
+        getAllTodos,
+      }}
+    >
+      {children}
+    </TodosContext.Provider>
+  );
 };

@@ -1,12 +1,12 @@
-import { axiosIstance } from '@api/index';
+import { axiosIstance } from "@api/axiosIstance";
 
 export const todoApi = {
   getAllTodos: async () => {
-    return await axiosIstance.get('/');
+    return await axiosIstance.get("/");
   },
 
   createTodo: async (title: string) => {
-    return await axiosIstance.post('/', { title });
+    return await axiosIstance.post("/", { title });
   },
 
   editTodo: async (id: number, title: string, isCompleted: boolean) => {

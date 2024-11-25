@@ -1,19 +1,25 @@
 import { Text, View, StyleSheet } from "react-native";
-// import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import { useTodos } from "../../hooks/useTodos";
-import { TodoList } from "../../components/TodoList";
+import { TodoItemWrapper } from "@components/index";
+import { useTodosContext } from "@hooks/useTodosContext";
 
 export default function Index() {
-  const { todos, error, createTodo, editTodo, toggleTodo, deleteTodo } =
-    useTodos();
+  const { todos, editTodo, toggleTodo, deleteTodo } = useTodosContext();
   return (
-    // <GestureHandlerRootView style={styles.container}>
     <View style={styles.container}>
       <Text style={styles.text}> Todo List</Text>
-      <TodoList todos={todos}></TodoList>
+      <View style={styles.list}>
+        {todos.map((todo) => (
+          <TodoItemWrapper
+            key={todo.id}
+            todo={todo}
+            onDelete={deleteTodo}
+            onEdit={editTodo}
+            onToggle={toggleTodo}
+          />
+        ))}
+      </View>
     </View>
-    // </GestureHandlerRootView>
   );
 }
 
@@ -28,5 +34,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "#fff",
+  },
+
+  list: {
+    gap: 8,
   },
 });

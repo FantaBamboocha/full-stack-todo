@@ -1,21 +1,40 @@
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { Modal, StyleSheet, TextInput, View } from "react-native";
 
-interface CreateTodoModalProps {
+import { Button } from "@components/Button";
+
+interface ICreateTodoModalProps {
   isVisible: boolean;
   onClose: () => void;
+  newTodo: string;
+  onChange: (text: string) => void;
+  onSubmit: () => void;
 }
 
 export const CreateTodoModal = ({
   isVisible,
   onClose,
-}: CreateTodoModalProps) => {
+  newTodo,
+  onChange,
+  onSubmit,
+}: ICreateTodoModalProps) => {
+  const handleSubmit = () => {
+    onSubmit();
+    onClose();
+  };
   return (
     <Modal animationType="slide" transparent visible={isVisible}>
       <View style={styles.modalContent}>
-        <Text>Modal</Text>
-        <Pressable onPress={onClose}>
-          <Text>Close</Text>
-        </Pressable>
+        <Button onPress={onClose} label="Close" theme="primary" />
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            value={newTodo}
+            placeholder="Enter todo"
+            placeholderTextColor="#999"
+            onChangeText={onChange}
+          />
+          <Button onPress={handleSubmit} label="Add" theme="primary" />
+        </View>
       </View>
     </Modal>
   );
@@ -28,5 +47,20 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     backgroundColor: "#fff",
+  },
+
+  form: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 15,
+  },
+  input: {
+    flex: 1,
+    fontSize: 24,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
   },
 });

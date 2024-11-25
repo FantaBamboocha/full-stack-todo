@@ -1,10 +1,3 @@
-// module.exports = function (api) {
-//   api.cache(true);
-//   return {
-//     presets: ['babel-preset-expo'],
-//   };
-// };
-
 module.exports = function (api) {
   api.cache(true);
   return {
@@ -16,10 +9,9 @@ module.exports = function (api) {
           root: ["./"],
           extensions: [".tsx", ".ts", ".js", ".json"],
           alias: {
-            "@shared": "../shared",
-            "@": "./",
             "@api": "./api",
             "@components": "./components",
+            "@context": "./context",
             "@definitions": "./definitions",
             "@hooks": "./hooks",
           },

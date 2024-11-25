@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
-const BASE_URL = 'http://localhost:5000/todo';
+const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL;
 
 export const axiosIstance = axios.create({
   baseURL: BASE_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });

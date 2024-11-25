@@ -11,9 +11,11 @@
     "resolveJsonModule": true,
     "strict": true,
     "paths": {
-      "@/*": ["./*"],
-      "@shared/*": ["../shared/*"],
-      "@definitions/*": ["definitions/*"]
+      "@api/*": ["api/*"],
+      "@components/*": ["components/*"],
+      "@context/*": ["context/*"],
+      "@definitions/*": ["definitions/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]

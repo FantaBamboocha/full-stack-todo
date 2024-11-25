@@ -1,38 +1,35 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
 interface ButtonProps {
   label: string;
-  theme: "primary" | "secondary" | "danger";
+  theme: "primary" | "danger";
   onPress?: () => void;
 }
 
 export const Button = ({ label, theme, onPress }: ButtonProps) => {
   return (
-    <View style={styles.buttonContainer}>
-      <Pressable style={[styles.button, styles[theme]]} onPress={onPress}>
-        <Text style={styles.buttonLabel}>{label}</Text>
-      </Pressable>
-    </View>
+    <Pressable
+      style={({ pressed }) => [
+        {
+          opacity: pressed ? 0.5 : 1,
+        },
+        styles.button,
+        styles[theme],
+      ]}
+      onPress={onPress}
+    >
+      <Text style={styles.buttonLabel}>{label}</Text>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    width: 320,
-    height: 68,
-    marginHorizontal: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 3,
-  },
   button: {
-    backgroundColor: "#3772FF",
-    borderRadius: 10,
-    width: "100%",
-    height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 4,
   },
   buttonLabel: {
     color: "#fff",

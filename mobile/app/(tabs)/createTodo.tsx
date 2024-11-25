@@ -1,32 +1,41 @@
-import { Button } from "@/components/Button";
-import { CreateTodoModal } from "@/components/CreateTodoModal";
-import { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { useCallback, useState } from "react";
+import { View, StyleSheet } from "react-native";
+
+import { Button, CreateTodoModal } from "@components/index";
+import { useTodosContext } from "@hooks/useTodosContext";
 
 export default function CreateTodoScreen() {
-  const [title, setTitle] = useState("");
+  const { createTodo } = useTodosContext();
   const [isVisible, setIsVisible] = useState(false);
+  const [newTodo, setNewTodo] = useState("");
 
+  const handleChange = useCallback((text: string) => {
+    setNewTodo(text);
+  }, []);
+
+  const handleCreateTodo = useCallback(async () => {
+    // if (!newTodo.trim()) return;
+
+    createTodo(newTodo);
+    setNewTodo("");
+  }, [createTodo, newTodo]);
   const handlePress = () => {
     setIsVisible(true);
-    setTitle("World");
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
-      <Button
-        onPress={() => setTitle("Hello")}
-        label="Create"
-        theme="primary"
-      />
-      <Button onPress={handlePress} label="Cancel" theme="danger" />
+      <Button label="Create" theme="primary" onPress={handlePress} />
       <CreateTodoModal
         isVisible={isVisible}
         onClose={() => {
           setIsVisible(false);
+          setNewTodo("");
         }}
-      ></CreateTodoModal>
+        newTodo={newTodo}
+        onChange={handleChange}
+        onSubmit={handleCreateTodo}
+      />
     </View>
   );
 }
