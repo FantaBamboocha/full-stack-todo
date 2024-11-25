@@ -7,7 +7,7 @@ import errorMiddleware from './middlewares/error-middleware.js';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT || 5000);
 const app = express();
 
 app.use(express.json());
@@ -18,7 +18,7 @@ app.use(errorMiddleware);
 const start = async () => {
   try {
     await mongoose.connect(process.env.DB_URL as string);
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server started on PORT = ${PORT}`);
     });
   } catch (error) {

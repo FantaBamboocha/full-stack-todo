@@ -10,7 +10,7 @@
     "paths": {
       "@api/*": ["src/api/*"],
       "@components/*": ["src/components/*"],
-      "@definitions*": ["src/definitions/*"],
+      "@definitions/*": ["src/definitions/*"],
       "@hooks/*": ["src/hooks/*"]
     },
 
