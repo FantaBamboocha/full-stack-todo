@@ -11,14 +11,7 @@ interface ITodoItemProps {
 }
 
 export const TodoItem = React.memo(
-  ({
-    todo,
-    onDelete,
-    // onEdit,
-    onToggle,
-    // isEditable,
-    setIsEditable,
-  }: ITodoItemProps) => {
+  ({ todo, onDelete, onToggle, setIsEditable }: ITodoItemProps) => {
     const { id, title, isCompleted } = todo;
 
     return (
