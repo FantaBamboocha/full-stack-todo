@@ -1,85 +1,80 @@
 # Fullstack Todo App
 
-# Правила работы с Git
+This is a fullstack application for managing tasks (Todo) with features to create, delete, edit, and toggle task status.
+  
+The entire project is built using TypeScript to ensure type safety and maintainability.
 
-## 1. Основные ветки
+The application is built using the following technologies:
 
-- **`main`**: стабильная версия. Все изменения сюда попадают только после завершения разработки.
-- **`develop`**: основная ветка для разработки. В неё сливаются все изменения из веток фич и багфиксов.
+- **Backend**: Express, MongoDB
+- **Mobile**: Expo
+- **Frontend**: React, Ant Design
 
-## 2. Вспомогательные ветки
+## Description
 
-- **`feature/<название-фичи>`**: для разработки отдельных фич. Каждая новая фича разрабатывается в своей ветке. После завершения разработки ветка сливается в `develop`.
-  - Пример: `feature/login-page`, `feature/navbar`.
-- **`fix/<описание-исправления>`**: для исправления багов. Каждый багфикс разрабатывается в своей ветке, после чего сливается в `develop`.
-  - Пример: `fix/login-bug`, `fix/header-alignment`.
+The application allows users to:
+- Add new tasks
+- Delete tasks
+- Toggle task status (completed / not completed)
+- Edit task text
 
-## 3. Правила слияния веток
+## Getting Started
 
-- Все изменения должны проходить через merge request (MR).
-- После завершения работы и прохождения всех проверок, ветки сливаются.
+To run the project, make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) installed.
 
-## 4. Правила написания коммитов
+### 1. Clone this repository
 
-Мы используем формат **Conventional Commits**:
+```bash
+https://github.com/FantaBamboocha/full-stack-todo.git
+   ```
+### 2. Run the Server in development mode 
+  - Navigate to the server directory:
+   ```bash
+cd full-stack-todo
+cd server
+   ```
+- Install Dependencies 
+```bash
+npm install
+   ```
+- Configure MongoDB:
 
-- **`feat`**: для добавления новой функциональности.
-- **`fix`**: для исправления ошибок.
-- **`refactor`**: для рефакторинга кода без изменения его функциональности.
-- **`style`**: изменения, не влияющие на код (например, форматирование или исправление пробелов).
-- **`docs`**: изменения в документации.
+   - Set up the connection string in the `.env` file
+- Start the server
+```bash
+npm run dev
+   ```
+### 3. Run the Web app in development mode 
+  - Navigate to the web app directory:
+```bash
+cd full-stack-todo
+cd client
+   ```
+- Install Dependencies 
+```bash
+npm install
+   ```
+- Start the web application
+```bash
+npm run dev
+   ```
+### 4. Run the Mobile app in development mode 
+  - Navigate to the mobile app directory:
+   ```bash
+cd full-stack-todo
+cd mobile
+   ```
+- Install Dependencies 
+```bash
+npm install
+   ```
+- Configure BASE_URL
 
-### Примеры сообщений коммитов:
-
-- `feat(header): add navigation buttons`
-- `fix(login): correct login validation logic`
-
-## 5. Общие рекомендации
-
-- Перед началом новой фичи или исправления создавайте соответствующую ветку от `develop`.
-- Старайтесь делать небольшие, логически связанные коммиты.
-- При необходимости использования `fix` или `feat`, следите за тем, чтобы сообщение отражало суть изменений.
-
-# Принципы разработки
-
-## 1. Структура компонентов
-
-- Каждый новый компонент должен находиться в своей папке.
-- Внутри папки компонента хранится файл компонента и файл для стилей.
-- Файл стилей должен называться в формате `ComponentName.module.scss`, где `ComponentName` — это название компонента.
-
-## 2. Импорт и экспорт компонентов
-
-- Используйте именованные экспорты для всех компонентов, утилит и функций.
-- В каждой папке (например, `/components`, `/pages`) должен быть индексный файл `index.ts` или `index.tsx`, который реэкспортирует все модули из папки.
-- Для удобства и поддержки чистой структуры проекта используйте заранее настроенные алиасы импортов (например, `@components/`,`@pages/`, ).
-
-## 3. Декомпозиция компонентов
-
-- Разбивайте JSX-разметку на максимально мелкие компоненты.
-- Избегайте дублирования кода. Если одна и та же разметка используется в нескольких местах, вынесите её в отдельный переиспользуемый компонент.
-- Переиспользуемость компонентов. Создавайте компоненты так, чтобы их можно было использовать в различных частях приложения.
-
-## 4. Типизация
-
-- Пропсы компонентов — используем интерфейсы с названием компонента (например, `HeaderProps`), чтобы сразу было видно, что это типизация для конкретного компонента.
-- Глобальные типы — все типы и интерфейсы для данных, которые не связаны напрямую с компонентами, хранятся в папке `definitions`. Это может включать типы для API, данных из базы данных, пользовательских данных и других общих объектов.
-
-## 5. Хранение изображений
-
-- Все изображения проекта должны храниться в директории `/src/assets/images`.
-- Для лучшей организации изображений, рекомендуется разбивать их на категории или типы.
-- Чтобы улучшить производительность приложения, загружайте изображения лениво с помощью атрибута `loading="lazy`.
-
-## 6. Стили
-
-- Храните цветовые палитры, отступы, размеры шрифтов и другие повторяющиеся значения в `src/assets/styles/_variables.scss`
-
-```
-$primary-color: #3498db;
-$secondary-color: #2ecc71;
-$font-size-base: 16px;
-```
-
-- В каждый файл SCSS-модуля компонента, где нужны эти переменные, импортируйте их из файла с переменными.
-- Глобальные стили, которые должны применятся ко всему приложению, хранятся в `src/main.scss`
+   - To connect to the server, specify the server's address in the .env file:
+```bash
+EXPO_PUBLIC_BASE_URL=http://<your_ip>:<server_port>/todo
+   ```
+- Start the mobile application
+```bash
+npm run dev
+   ```
